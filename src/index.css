@@ -1,0 +1,217 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+/* Photography Portfolio Design System
+   Dark, elegant theme with warm accents
+   Editorial, magazine-like aesthetic
+*/
+
+@layer base {
+  :root {
+    /* Core palette - Dark charcoal base with warm amber accents */
+    --background: 20 14% 4%;
+    --foreground: 40 20% 95%;
+
+    --card: 20 10% 8%;
+    --card-foreground: 40 20% 95%;
+
+    --popover: 20 10% 8%;
+    --popover-foreground: 40 20% 95%;
+
+    /* Warm amber/gold primary */
+    --primary: 38 92% 50%;
+    --primary-foreground: 20 14% 4%;
+
+    /* Warm gray secondary */
+    --secondary: 30 8% 18%;
+    --secondary-foreground: 40 20% 95%;
+
+    /* Muted warm tones */
+    --muted: 30 6% 15%;
+    --muted-foreground: 30 10% 55%;
+
+    /* Accent - subtle warm highlight */
+    --accent: 30 10% 12%;
+    --accent-foreground: 40 20% 95%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 40 20% 95%;
+
+    --border: 30 8% 18%;
+    --input: 30 8% 18%;
+    --ring: 38 92% 50%;
+
+    --radius: 0.25rem;
+
+    /* Custom photography tokens */
+    --hero-gradient: linear-gradient(180deg, transparent 0%, hsl(20 14% 4% / 0.3) 50%, hsl(20 14% 4%) 100%);
+    --overlay-dark: hsl(20 14% 4% / 0.7);
+    --overlay-light: hsl(20 14% 4% / 0.4);
+    --text-shadow: 0 2px 20px hsl(20 14% 4% / 0.8);
+    --image-hover-scale: 1.05;
+    
+    /* Typography */
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'Inter', sans-serif;
+    
+    /* Spacing rhythm */
+    --section-padding: clamp(4rem, 10vw, 8rem);
+    --content-gap: clamp(2rem, 5vw, 4rem);
+
+    /* Sidebar tokens */
+    --sidebar-background: 20 10% 6%;
+    --sidebar-foreground: 40 20% 95%;
+    --sidebar-primary: 38 92% 50%;
+    --sidebar-primary-foreground: 20 14% 4%;
+    --sidebar-accent: 30 10% 12%;
+    --sidebar-accent-foreground: 40 20% 95%;
+    --sidebar-border: 30 8% 18%;
+    --sidebar-ring: 38 92% 50%;
+  }
+
+  .dark {
+    /* Already dark theme by default */
+    --background: 20 14% 4%;
+    --foreground: 40 20% 95%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    @apply font-medium tracking-tight;
+  }
+}
+
+@layer components {
+  /* Hero overlay gradient */
+  .hero-overlay {
+    background: var(--hero-gradient);
+  }
+
+  /* Image hover effect */
+  .image-hover {
+    @apply overflow-hidden;
+  }
+  
+  .image-hover img {
+    @apply transition-transform duration-700 ease-out;
+  }
+  
+  .image-hover:hover img {
+    transform: scale(var(--image-hover-scale));
+  }
+
+  /* Editorial text styling */
+  .text-editorial {
+    font-family: var(--font-display);
+    @apply tracking-wide;
+  }
+
+  /* Section padding */
+  .section-padding {
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+  }
+
+  /* Reveal animation */
+  .reveal {
+    @apply opacity-0 translate-y-8;
+    animation: reveal 0.8s ease-out forwards;
+  }
+
+  .reveal-delay-1 { animation-delay: 0.1s; }
+  .reveal-delay-2 { animation-delay: 0.2s; }
+  .reveal-delay-3 { animation-delay: 0.3s; }
+  .reveal-delay-4 { animation-delay: 0.4s; }
+
+  /* Link underline animation */
+  .link-underline {
+    @apply relative;
+  }
+  
+  .link-underline::after {
+    content: '';
+    @apply absolute left-0 bottom-0 w-full h-px bg-primary scale-x-0 origin-right transition-transform duration-300;
+  }
+  
+  .link-underline:hover::after {
+    @apply scale-x-100 origin-left;
+  }
+}
+
+@layer utilities {
+  /* Text shadow for readability over images */
+  .text-shadow {
+    text-shadow: var(--text-shadow);
+  }
+
+  /* Overlay backgrounds */
+  .bg-overlay-dark {
+    background-color: var(--overlay-dark);
+  }
+  
+  .bg-overlay-light {
+    background-color: var(--overlay-light);
+  }
+
+  /* Letter spacing editorial */
+  .tracking-editorial {
+    letter-spacing: 0.2em;
+  }
+}
+
+/* Keyframe animations */
+@keyframes reveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
